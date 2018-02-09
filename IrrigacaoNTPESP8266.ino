@@ -6,7 +6,6 @@
 //
 //
 
-
 #include <ESP8266WiFi.h>
 #include "runanyway.h" //contra o acionamento dos pinos de acordo com a hora
 #include "horaNTP.h" // consulta hora NTP via internet
@@ -19,7 +18,7 @@ char pass[] = "Suasenha";       // your network password
 #define MINUTO 1
 #define TEMPOMS 2
 
-// PROGRAMAR OS HORARIOS E TEMPOS DE REGA AQUI
+// PROGRAMAR OS HORARIOS E TEMPOS DE REGA AQUI EM ARRAY
 //              {hora, min, tempo em milissegundos}
 
 int rega_01[] = {7,   00,  120000};
@@ -29,9 +28,7 @@ int rega_03[] = {22,   43,  120000};
 
 int rele01 = D1; // pino do rele
 
-
 // S E T U P
-//
 void setup()
 {
   Serial.begin(115200);
@@ -57,7 +54,7 @@ void setup()
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
 
-  setupNtp();//verifica hora da internet
+  setupNtp();//verifica hora da internet na lib "horaNTP.h"
 
 }
 
@@ -65,14 +62,14 @@ void setup()
 //
 void loop()
 {
-
-  horaliga(rega_01[HORA], rega_01[MINUTO], rega_01[TEMPOMS], NowHora(),   NowMin(), rele01);
+// insira na seguinte ordem (int Horaliga, int Minutoliga, unsigned long Intervalo, int horaAtual, int minutoAtual, int pinoDesejado) 
+  horaliga(rega_01[HORA], rega_01[MINUTO], rega_01[TEMPOMS], NowHora(),   NowMin(), rele01); // verifica hora da ação na "runanyway.h"
   horaliga(rega_02[HORA], rega_02[MINUTO], rega_02[TEMPOMS], NowHora(),   NowMin(), rele01);
   horaliga(rega_03[HORA], rega_03[MINUTO], rega_03[TEMPOMS], NowHora(),   NowMin(), rele01);
   Serial.print("hora atual  ");
   Serial.println(Hora());
 
-  // wait ten seconds before asking for the time again
+// aguarda 1 seg
   delay(1000);
 }
 
