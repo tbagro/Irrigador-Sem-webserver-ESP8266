@@ -4,19 +4,15 @@
 //
 // Tiago Alexandre Batista 2018
 //
-
 //
 
 
 #include <ESP8266WiFi.h>
-
 #include "runanyway.h" //contra o acionamento dos pinos de acordo com a hora
 #include "horaNTP.h" // consulta hora NTP via internet
 
-
-char ssid[] = "Tamanduai";  //  your network SSID (name)
-char pass[] = "semsenha";       // your network password
-
+char ssid[] = "SuaSSID";  //  your network SSID (name)
+char pass[] = "Suasenha";       // your network password
 
 // matrizes de horarios e tempos de rega (acionamentos do rele) no array de rega
 #define HORA 0
